@@ -74,7 +74,7 @@
             <!-- LOGO SECTION -->
             <header class="navbar-header">
 
-                <a href="index.html" class="navbar-brand">
+                <a href="/" class="navbar-brand">
                     <img src="<?php echo Yii::app()->request->baseUrl; ?>/assets/img/logo.png" alt="" /></a>
             </header>
             <!-- END LOGO SECTION -->
@@ -298,7 +298,7 @@
                     </a>
 
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="icon-user"></i> User Profile </a>
+                        <li><a href="<?=$this->createUrl('profile/user',['id'=>1])?>"><i class="icon-user"></i> User Profile </a>
                         </li>
                         <li><a href="#"><i class="icon-gear"></i> Settings </a>
                         </li>

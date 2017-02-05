@@ -1,13 +1,10 @@
 <?php
 
-//namespace app\models;
-//
-//use yii\base\Model;
 
 class Users extends CActiveRecord
 {
 
-//    public $id;
+    const SCENARIO_SIGNUP = 'signup';
     public $first_name;
     public $last_name;
     public $email;
@@ -24,18 +21,56 @@ class Users extends CActiveRecord
     {
         return parent::model($className);
     }
+
     public function tableName()
     {
         return '{{users}}';   // название нашей таблицы в базе данных
     }
 
+    public function rules(){
+        return [
+            ['first_name, last_name, password, confirm_password', 'required', 'on'=>self::SCENARIO_SIGNUP ],
+            ['first_name, last_name', 'length', 'min'=>3, 'max'=>50],
+            ['first_name, last_name', 'math', 'pattern'=>'/^[A-z][\w]+$/'],
+            ['email, password', 'required'],
+            ['email', 'email'],
+            ['email', 'unique'],
+            ['email', 'filter', 'filter'=>'mb_strtolower'],
+            ['password, confirm_password', 'min'=>6, 'max'=>30],
+            ['password', 'compare', 'compareAttribute'=>'confirm_password', 'on'=>self::SCENARIO_SIGNUP ],
+        ];
+    }
 
-    public function loginForm(){
-        return 'form login';
+    public function attributeLabels(){
+        return [
+            'first_name' => 'First name',
+            'last_name' => 'Last name',
+            'email' => 'E-mail',
+            'password' => 'Password',
+            'confirm_password' => 'Confirm password',
+        ];
     }
-    
-    public function registrationForm(){
-        return 'registration';
+
+    protected function beforeSave(){
+        if (parent::onBeforeSave()){
+            if ($this->isNewRecord){
+                $this->password = $this->hashPassword($this->password);
+            }
+            return true;
+        }
+        return false;
     }
+
+    public function hashPassword($password){
+        return md5($password);
+    }
+//
+//    public function loginForm(){
+//        return 'form login';
+//    }
+//
+//    public function registrationForm(){
+//        return 'registration';
+//    }
 
 }

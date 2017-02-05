@@ -1,8 +1,6 @@
 <?php
 
-/**
- * SiteController is the default controller to handle user requests.
- */
+
 class ProfileController extends CController
 {
 	/**
@@ -13,9 +11,11 @@ class ProfileController extends CController
 		echo 'Hello World';
 	}
 
-	public function actionUser()
+	public function actionUser($id)
 	{
-		echo 'profile';
+        $userInfo = $id;
+		$this->render('profile', ['userInfo'=>$userInfo]);
+//		echo 'profile';
 	}
 
 	public function actionEdit()
