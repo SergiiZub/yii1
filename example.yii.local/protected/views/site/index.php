@@ -8,5 +8,12 @@
 
 ?>
 
-<h1>site index ?r=profile/edit</h1>
+<h1>index action content:</h1>
+<?=$data;?>
+<hr>
+<pre>
+ <?php var_dump($users)?>
+</pre>
+
+
 

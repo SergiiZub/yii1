@@ -18,6 +18,13 @@ return array(
         'application.components.*',
     ),
 
+    'modules'=>array(
+        'gii'=>array(
+            'class'=>'system.gii.GiiModule',
+            'password'=>'123',
+        ),
+    ),
+
     'defaultController'=>'site',
 
     // application components
