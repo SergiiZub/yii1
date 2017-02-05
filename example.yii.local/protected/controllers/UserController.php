@@ -6,7 +6,7 @@ class UserController extends CController
     public function actionIndex()
     {
         // Получить список всех зарегестрированных пользователей...
-        $users = User::model()->findAll();
+        $users = Users::model()->findAll();
 
         // ...и вывести их
         $this->render('users_list', array('users'=>$users));
@@ -16,21 +16,23 @@ class UserController extends CController
     public function actionSignup()
     {
         // Создать модель и указать ей, что используется сценарий регистрации
-        $user = new User(User::SCENARIO_SIGNUP);
+        $user = new Users(Users::SCENARIO_SIGNUP);
 
         // Если пришли данные для сохранения
-        if(isset($_POST['User']))
+        if(isset($_POST['Users']))
         {
+//            die('here');
             // Безопасное присваивание значений атрибутам
-            $user->attributes = $_POST['User'];
+            $user->attributes = $_POST['Users'];
 
             // Проверка данных
             if($user->validate())
             {
                 // Сохранить полученные данные
                 // false нужен для того, чтобы не производить повторную проверку
-                $user->save(false);
-
+                $res = $user->save(false);
+                echo '<pre>';
+var_dump($res);die;
                 // Перенаправить на список зарегестрированных пользователей
                 $this->redirect($this->createUrl('user/'));
             }
@@ -38,5 +40,6 @@ class UserController extends CController
 
         // Вывести форму
         $this->render('form_signup', array('form'=>$user));
+//        $this->render('form_signup', array('user'=>$user));
     }
 }

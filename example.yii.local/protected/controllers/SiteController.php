@@ -5,7 +5,7 @@
 /**
  * SiteController is the default controller to handle user requests.
  */
-class SiteController extends CController
+class SiteController extends Controller
 {
 	/**
 	 * Index action is the default action in a controller.
@@ -28,6 +28,17 @@ class SiteController extends CController
 
 		$this->render('index', ['data'=>$model->loginForm(), 'users'=>$users]);
 
+	}
+
+	public function actionError()
+	{
+		if($error=Yii::app()->errorHandler->error)
+		{
+			if(Yii::app()->request->isAjaxRequest)
+				echo $error['message'];
+			else
+				$this->render('error', $error);
+		}
 	}
 
 	public function actionLogin()

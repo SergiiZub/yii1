@@ -341,6 +341,13 @@
 
         <ul id="menu" class="collapse">
 
+            <li class="panel">
+                <a href="<?=$this->createUrl('user/index')?>" >
+                    <i class="icon-table"></i> Users list
+
+
+                </a>
+            </li>
 
             <li class="panel">
                 <a href="index.html" >

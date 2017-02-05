@@ -9,11 +9,19 @@ class Users extends CActiveRecord
     public $last_name;
     public $email;
     public $password;
+    public $confirm_password;
     public $role;
     public $is_active;
 
     public function attributeNames() {
-        // TODO: Implement attributeNames() method.
+        return [
+            'id' => 'ID',
+            'first_name' => 'First name',
+            'last_name' => 'Last name',
+            'email' => 'E-mail',
+            'password' => 'Password',
+            'confirm_password' => 'Confirm password',
+        ];
     }
 
 
@@ -29,14 +37,14 @@ class Users extends CActiveRecord
 
     public function rules(){
         return [
-            ['first_name, last_name, password, confirm_password', 'required', 'on'=>self::SCENARIO_SIGNUP ],
+            ['first_name, last_name, password, confirm_password', 'required', 'on'=>self::SCENARIO_SIGNUP, ],
             ['first_name, last_name', 'length', 'min'=>3, 'max'=>50],
-            ['first_name, last_name', 'math', 'pattern'=>'/^[A-z][\w]+$/'],
+            ['first_name, last_name', 'match', 'pattern'=>'/^[A-z][\w]+$/', ],
             ['email, password', 'required'],
             ['email', 'email'],
             ['email', 'unique'],
             ['email', 'filter', 'filter'=>'mb_strtolower'],
-            ['password, confirm_password', 'min'=>6, 'max'=>30],
+            ['password, confirm_password', 'length', 'min'=>6, 'max'=>30],
             ['password', 'compare', 'compareAttribute'=>'confirm_password', 'on'=>self::SCENARIO_SIGNUP ],
         ];
     }
@@ -52,12 +60,15 @@ class Users extends CActiveRecord
     }
 
     protected function beforeSave(){
-        if (parent::onBeforeSave()){
+//var_dump($insert);die;
+        if (parent::onBeforeSave('save')){
+
             if ($this->isNewRecord){
                 $this->password = $this->hashPassword($this->password);
             }
             return true;
         }
+//        die(__FILE__);
         return false;
     }
 
