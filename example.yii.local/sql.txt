@@ -1,0 +1,32 @@
+example.yii.local
+
+CREATE TABLE `tbl_users` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`first_name` VARCHAR(255) NOT NULL,
+	`last_name` VARCHAR(255) NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`password` CHAR(32) NOT NULL,
+	`role` TINYINT(1) UNSIGNED NOT NULL DEFAULT '2',
+	`is_active` ENUM('1','0') NOT NULL DEFAULT '1',
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `tbl_user_profile` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`user_id` INT(11) UNSIGNED NOT NULL,
+	`birthday` DATE NULL DEFAULT NULL,
+	`city` VARCHAR(255) NULL DEFAULT NULL,
+	`country` VARCHAR(255) NULL DEFAULT NULL,
+	`address` VARCHAR(255) NULL DEFAULT NULL,
+	`phone` CHAR(13) NULL DEFAULT NULL,
+	`skype` VARCHAR(255) NULL DEFAULT NULL,
+	`url` VARCHAR(255) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	UNIQUE INDEX `user_id` (`user_id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
