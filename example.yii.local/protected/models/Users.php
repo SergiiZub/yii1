@@ -61,7 +61,7 @@ class Users extends CActiveRecord
 
     protected function beforeSave(){
 //var_dump($insert);die;
-        if (parent::onBeforeSave('save')){
+        if (parent::beforeSave()){
 
             if ($this->isNewRecord){
                 $this->password = $this->hashPassword($this->password);

@@ -11,4 +11,5 @@
     <span>User name: <?=ucfirst($user->first_name).' '.ucfirst($user->last_name)?><br></span>
     <span>E-mail:<?=$user->email?><br></span>
     <span>Registration date: <?=$user->date_registration?><br></span>
+    <hr>
 <?php endforeach;?>

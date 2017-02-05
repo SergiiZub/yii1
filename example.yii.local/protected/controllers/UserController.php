@@ -30,9 +30,10 @@ class UserController extends CController
             {
                 // Сохранить полученные данные
                 // false нужен для того, чтобы не производить повторную проверку
-                $res = $user->save(false);
-                echo '<pre>';
-var_dump($res);die;
+//                $res =
+                    $user->save(false);
+//                echo '<pre>';
+//var_dump($res);die;
                 // Перенаправить на список зарегестрированных пользователей
                 $this->redirect($this->createUrl('user/'));
             }
