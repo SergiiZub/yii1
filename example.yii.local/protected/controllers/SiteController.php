@@ -10,6 +10,31 @@ class SiteController extends CController
 	 */
 	public function actionIndex()
 	{
+
 		echo 'Hello World';
+		$this->render('index');
 	}
+
+	public function actionLogin()
+	{
+		echo 'please login';
+//		$model = new My;
+		$model = My::model();
+//		$model=$this->loadModel();
+		$this->render('login', $model->loginForm());
+	}
+
+	public function actionRegistration()
+	{
+		echo 'registration';
+	}
+
+//	public function actionList()
+//	{
+//		$models=note::model()->findAll();
+//
+//		$this->render("list",array(
+//			"model"=>$models,
+//		));
+//	}
 }
